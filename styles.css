@@ -72,3 +72,19 @@ button:hover {
     font-size: 18px;
     color: #333;
 }
+/* Yeni çarpı işareti stilini ekliyoruz */
+.square.x-marked {
+    position: relative;
+    background-color: #ffcccc; /* Çarpı işareti olan kareyi kırmızı yapıyoruz */
+}
+
+.x-mark {
+    position: absolute;
+    font-size: 20px;
+    color: red;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-weight: bold;
+}
+
