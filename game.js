@@ -150,4 +150,67 @@ function saveBestTime() {
     leaderboard.sort((a, b) => a.time.localeCompare(b.time) || a.moves - b.moves);
     leaderboard = leaderboard.slice(0, 5); // En iyi 5 sonucu göster
 
-    localStorage.setItem('leaderboard
+    localStorage.setItem('leaderboard', JSON.stringify(leaderboard));
+    updateLeaderboard();
+}
+
+// Başarı tablosunu güncelle
+function updateLeaderboard() {
+    const leaderboardList = document.getElementById('leaderboardList');
+    leaderboardList.innerHTML = '';
+    leaderboard.forEach(entry => {
+        const li = document.createElement('li');
+        li.textContent = `Zaman: ${entry.time} - Hamleler: ${entry.moves}`;
+        leaderboardList.appendChild(li);
+    });
+}
+
+// Undo işlemi
+function undo() {
+    if (undoStack.length === 0) return;
+    const lastMove = undoStack.pop();
+    const square = document.querySelector(`[data-row="${lastMove.row}"][data-col="${lastMove.col}"]`);
+    square.innerHTML = '';
+    queens = queens.filter(queen => queen.row !== lastMove.row || queen.col !== lastMove.col);
+    placedQueens--;
+    markThreatenedSquares();
+    updateUndoButton();
+    updateMoveCount();
+}
+
+// Undo butonunun aktifliğini kontrol et
+function updateUndoButton() {
+    document.getElementById('undoButton').disabled = undoStack.length === 0;
+}
+
+// İpucu butonunu etkinleştir
+function useHint() {
+    if (hintUsed) return;
+    hintUsed = true;
+
+    // 30 saniye içinde yalnızca bir kez kullanılabilir
+    const randomSquare = queens[Math.floor(Math.random() * queens.length)];
+    const hintMessage = `Bir queen ${randomSquare.row}, ${randomSquare.col} koordinatında.`;
+
+    alert(hintMessage); // İpucu göster
+    document.getElementById('hintButton').disabled = true; // Butonu devre dışı bırak
+    setTimeout(() => {
+        document.getElementById('hintButton').disabled = false;
+    }, 30000); // 30 saniye sonra buton tekrar aktif olacak
+}
+
+// Yeni oyun başlat
+function restartGame() {
+    createBoard();
+    document.getElementById('messageContainer').textContent = '';
+    document.getElementById('timeContainer').textContent = 'Zaman: 00:00';
+    document.getElementById('moveContainer').textContent = 'Hamleler: 0';
+    document.getElementById('hintButton').disabled = false;
+}
+
+document.getElementById('undoButton').addEventListener('click', undo);
+document.getElementById('hintButton').addEventListener('click', useHint);
+document.getElementById('restartButton').addEventListener('click', restartGame);
+
+// Sayfa yüklendiğinde tahtayı oluştur
+createBoard();
