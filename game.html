@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Queens Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="controls">
+            <button id="undoButton" disabled>Geri Al</button>
+            <button id="hintButton">İpucu</button>
+            <button id="restartButton">Yeniden Başlat</button>
+        </div>
+        <div id="timeContainer">Zaman: 00:00</div>
+        <div id="moveContainer">Hamleler: 0</div>
+        <div id="messageContainer"></div>
+        <div id="gameBoard" class="game-board"></div>
+        <div id="leaderboard">
+            <h3>Başarı Tablosu</h3>
+            <ul id="leaderboardList"></ul>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>
