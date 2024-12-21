@@ -1,23 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="tr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game of Crowns</title>
+    <title>Queens Game</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="game-container">
-        <h1>Game of Crowns</h1>
-        <div id="game-board" class="board"></div>
-        <div class="message"></div>
-        <button id="reset-btn">Reset Game</button>
+        <div class="controls">
+            <button id="undoButton">Geri Al</button>
+            <button id="hintButton">İpucu</button>
+            <button id="restartButton">Yeniden Başlat</button>
+        </div>
+        <div id="timeContainer">Zaman: 00:00</div>
+        <div id="moveContainer">Hamleler: 0</div>
+        <div id="messageContainer"></div>
+        <div id="gameBoard" class="game-board"></div>
+        <div id="leaderboard">
+            <h3>Başarı Tablosu</h3>
+            <ul id="leaderboardList"></ul>
+        </div>
     </div>
     <script src="script.js"></script>
 </body>
 </html>
-<div class="game-container">
-    <button id="undoButton">Geri Al</button> <!-- Geri Al Butonu -->
-    <div id="messageContainer"></div>
-    <div id="gameBoard" class="game-board"></div>
-</div>
